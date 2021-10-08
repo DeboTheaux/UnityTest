@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class GameInitializer : MonoBehaviour
+public class GameInitializer : MonoBehaviour, IGameInitializer
 {
     [SerializeField] private Camera mainCamera;
     [SerializeField] private AudioManager audioManager;
@@ -39,4 +39,10 @@ public class GameInitializer : MonoBehaviour
     {
         simpleNavigator.ShowScreen<IMainMenuView>();
     }
+}
+
+//para testing
+public interface IGameInitializer
+{
+
 }

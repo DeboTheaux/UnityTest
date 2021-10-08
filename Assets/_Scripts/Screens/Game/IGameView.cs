@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System;
 
 public interface IGameView : IScreen
 {
-    
+    void StartTimer(float withSeconds);
+    void InitializeSpawners();
 }
