@@ -13,6 +13,7 @@ public class SpawnerPresenter
 
     public void SpawnPowerUp(string id)
     {
-        figureFactory.Create(id);
+        var figureToInstance = figureFactory.Create(id);
+        view.InstantiateFigure(figureToInstance);
     }
 }

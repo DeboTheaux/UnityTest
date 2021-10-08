@@ -14,4 +14,9 @@ public class SpawnerView : MonoBehaviour, ISpawnerView
     {
         presenter = Presenter();
     }
+
+    public void InstantiateFigure(Figure figureToInstance)
+    {
+        Instantiate(figureToInstance, transform.position, Quaternion.identity);
+    }
 }
