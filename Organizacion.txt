@@ -1,0 +1,29 @@
+Clickear objetos que se instancian de forma aleatoria.
+Los objetos deben desaparecer a los 5 segundos.
+No clickear un objeto significa perder puntos. (1 figura normal 5 figura avanzada).
+Elementos: 
+[  ] Moneda (Gana 5 puntos), 
+[  ] Esfera Azul (Gana 2 puntos),
+[  ] Bloque Amarillo (Gana 1 punto),
+[  ] Caja Roja (Pierde 5 puntos),
+[  ] Escudo (5 clicks 10 puntos),
+[  ] Target (1 click 0 puntos respawnea 5 monedas 10 puntos si desaparece).
+Dificultades: fácil, medio y difícil. 
+
+Tipo Figura
+Strategy pattern: implementan interfaces Ganar puntos, Clicks para eliminar, Bonus, Desaparecer. 
+
+Pool de objetos 
+
+Mvp
+Service locator
+Audio manager
+Vfx
+
+-----------
+TÉCNICA:
+-Para el spawner de figuras, se va a utilizar un object pool combinado con un factory method.
+-Figuras van a implementar interfaces
+-Para el click Obserbe pattern
+
+23:25 Jueves 00:45 diseño del juego y arte
