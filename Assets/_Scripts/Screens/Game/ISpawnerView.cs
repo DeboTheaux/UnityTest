@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface ISpawnerView 
 {
-    void InstantiateFigure(Figure figureToInstance);
+    
 }

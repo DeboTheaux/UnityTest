@@ -8,6 +8,11 @@ public class GameSettings : ScriptableObject
 {
     [SerializeField] private Difficulty[] difficulty;
 
+    public GameSettings()
+    {
+        DependencyProvider.RegisterDependency<GameSettings>(this);
+    }
+
     public Difficulty GameDifficulty
     {
         get
@@ -25,4 +30,5 @@ public class Difficulty
     [Space]
     [Header("Settings")]
     public float totalGameMiliseconds = 100;
+    public float spawnRate = 0.5f;
 }

@@ -9,10 +9,13 @@ public class GameView : MonoBehaviour, IGameView
 
     private GamePresenter presenter;
 
-    private GamePresenter Presenter() => new GamePresenter(this, gameSettings.GameDifficulty.totalGameMiliseconds);
+    private GamePresenter Presenter() => new GamePresenter(this, 
+                                         gameSettings,
+                                         new InputCatcher());
 
     public void Initialize()
     {
+        DependencyProvider.RegisterDependency<TimerView>(timerView);
         presenter = Presenter();
         presenter.Present();
     }

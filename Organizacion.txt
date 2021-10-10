@@ -28,3 +28,14 @@ TÉCNICA:
 
 23:25 Jueves 00:45 diseño del juego y arte
 4:35 con errores de editor...
+21:00
+
+
+//todo:
+Instanciar Figuras YA 01:42
+Agregar Object Pooling LISTO 2:46
+InputHandler del usuario.
+Las Figuras se pueden componer en función de si suman puntos, si restan puntos, etc.
+Niveles de dificultad
+Audio Manager
+VFX

@@ -5,18 +5,19 @@ using UnityEngine;
 public class SpawnerView : MonoBehaviour, ISpawnerView
 {
     [SerializeField] private FigureConfiguration configuration;
+    [SerializeField] private BehaviourAgent[] spawns;
 
     SpawnerPresenter presenter;
 
-    SpawnerPresenter Presenter() => new SpawnerPresenter(this, new FigureFactory(configuration));
+    SpawnerPresenter Presenter() => new SpawnerPresenter(this, 
+                                    new FigureFactory(configuration),
+                                    spawns,
+                                    DependencyProvider.GetDependency<TimerView>(),
+                                    DependencyProvider.GetDependency<GameSettings>());
 
     public void Initialize()
     {
         presenter = Presenter();
-    }
-
-    public void InstantiateFigure(Figure figureToInstance)
-    {
-        Instantiate(figureToInstance, transform.position, Quaternion.identity);
+        presenter.Present();
     }
 }

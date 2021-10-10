@@ -327,10 +327,9 @@ GameObject:
   - component: {fileID: 4194827560693120}
   - component: {fileID: 33696426054016862}
   - component: {fileID: 23868303300934196}
-  - component: {fileID: 64894975738766156}
-  - component: {fileID: 1850850425}
+  - component: {fileID: 233552587}
   m_Layer: 0
-  m_Name: SM_Veh_Plane_Stunt_01
+  m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -344,7 +343,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300689381462198}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -0.25260147, z: 0.06685939}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 4425564749496970}
@@ -409,39 +408,28 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &64894975738766156
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1300689381462198}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 89cfb46882e163d428cb9f3d79ae2393, type: 3}
---- !u!95 &1850850425
-Animator:
-  serializedVersion: 3
+--- !u!114 &233552587
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1300689381462198}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 98fcba39232919247863de57a44ff654, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52d00ae7988d54d41bf1f23134b62bbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  totalLife: 10
+  speed: 0.5
+  amplitude: 80
+  degreesYRotationPositive: 0
+  degreesYRotationNegative: 0
+  delayFrames: 0
+  rayDistanceToGround: 10
+  layerGround:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1305793217231656
 GameObject:
   m_ObjectHideFlags: 0

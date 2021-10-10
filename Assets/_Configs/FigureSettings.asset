@@ -12,4 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7edbf43ac7b2944392eafe0d4915311, type: 3}
   m_Name: FigureSettings
   m_EditorClassIdentifier: 
-  figures: []
+  figures:
+  - {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62, type: 3}
+  - {fileID: 546397150477607800, guid: 160a6121b4d25254da31bdab63ad82b7, type: 3}
+  - {fileID: 6867681652711569663, guid: 917b3e362cb87ec4c9f396c33a955af2, type: 3}
+  - {fileID: 679172602310741644, guid: 4ec4cfadebd96154690192fbd49e28b8, type: 3}
+  - {fileID: 8469403779684493934, guid: 296b6c6ad62626c48aef7fa6c5e2a9a8, type: 3}
+  - {fileID: 8460405241369980959, guid: 6fb840e833a0f2049b655aba4bf98513, type: 3}
+  poolObjectCount: 2

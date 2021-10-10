@@ -16,13 +16,13 @@ public class TimerView : MonoBehaviour
     [SerializeField] private Image imageTimer;
     [SerializeField] private Text textTimer;
 
-    private int seconds; // valor que debe venir desde el profe..
+    private int seconds; 
     public int RemainingTime => remainingTime;
     int remainingTime;
     private IDisposable currentTimer;
    // private ISoundManager soundManager;
 
-    private void Start()
+    private void Awake()
     {
        // soundManager = ServiceLocator.GetServices<ISoundManager>();
     }
@@ -32,7 +32,7 @@ public class TimerView : MonoBehaviour
         OnStartTimer();
         this.seconds = seconds;
         remainingTime = seconds;
-        this.EveryTick = EveryTick;
+        this.EveryTick += EveryTick;
         currentTimer = new Timer().Start(1, seconds, UpdateTime, OnTimeOut);
     }
 

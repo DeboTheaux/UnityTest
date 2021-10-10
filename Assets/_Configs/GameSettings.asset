@@ -16,9 +16,12 @@ MonoBehaviour:
   - name: Easy
     selected: 0
     totalGameMiliseconds: 100
+    spawnRate: 1
   - name: Medium
     selected: 0
     totalGameMiliseconds: 10
+    spawnRate: 0.5
   - name: Hard
     selected: 0
     totalGameMiliseconds: 50
+    spawnRate: 0.5

@@ -1,23 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Game/Figures Configuration", fileName = "FigureSettings")]
 public class FigureConfiguration : ScriptableObject
 {
     [SerializeField] private Figure[] figures;
-    private Dictionary<string, Figure> idToFigure;
+    [Tooltip("Initial Count of Figures per Figure")]
+    [SerializeField] private int poolObjectCount;
+    private Dictionary<FigureId, Figure> idToFigure;
+
+    public Figure[] Figures => figures;
+    public int PoolObjectCount => poolObjectCount;
 
     public void Initialize()
     {
-        idToFigure = new Dictionary<string, Figure>(figures.Length);
+        idToFigure = new Dictionary<FigureId, Figure>(figures.Length);
         foreach (var figure in figures)
         {
             idToFigure.Add(figure.Id, figure);
         }
     }
 
-    public Figure GetFigurePrefabById(string id)
+    public Figure GetFigurePrefabById(FigureId id)
     {
         if (!idToFigure.TryGetValue(id, out var figure))
         {
@@ -25,4 +31,6 @@ public class FigureConfiguration : ScriptableObject
         }
         return figure;
     }
+
+    public IEnumerable<Figure> GetRandomFigure() => idToFigure.RandomValues<FigureId, Figure>();
 }
