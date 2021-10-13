@@ -7,6 +7,7 @@ public class FigureFactory
     private readonly FigureConfiguration configuration;
     private Dictionary<FigureId, ObjectPool> pools = new Dictionary<FigureId, ObjectPool>();
 
+    private Figure currentFigure;
 
     public FigureFactory(FigureConfiguration configuration)
     {
@@ -29,11 +30,13 @@ public class FigureFactory
         return objectPool.Spawn<Figure>(spawnTransform);
     }
 
-    public void CreateRandom(Transform spawnTransform)
+    public Figure CreateRandom(Transform spawnTransform)
     {
         foreach (var figure in configuration.GetRandomFigure().Take(1))
         {
-            CreateFigureById(figure.Id, spawnTransform);
+            currentFigure = CreateFigureById(figure.Id, spawnTransform);
         }
+
+        return currentFigure;
     }
 }

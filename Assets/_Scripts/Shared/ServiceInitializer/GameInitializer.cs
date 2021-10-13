@@ -21,7 +21,7 @@ public class GameInitializer : MonoBehaviour, IGameInitializer
 
     private void InjectDependencies()
     {
-        DependencyProvider.RegisterDependency<Camera>(mainCamera);
+        DependencyProvider.RegisterDependency<Canvas>(gameCanvas.GetComponent<Canvas>());
         DependencyProvider.RegisterDependency<AudioManager>(audioManager);
     }
 

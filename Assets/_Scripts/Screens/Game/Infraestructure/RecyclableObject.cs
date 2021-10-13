@@ -4,6 +4,8 @@ public abstract class RecyclableObject : MonoBehaviour
 {
     private ObjectPool _objectPool;
 
+    protected bool isRecycled = false;
+
     internal void Configure(ObjectPool objectPool)
     {
         _objectPool = objectPool;

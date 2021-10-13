@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: FigureSettings
   m_EditorClassIdentifier: 
   figures:
-  - {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62, type: 3}
-  - {fileID: 546397150477607800, guid: 160a6121b4d25254da31bdab63ad82b7, type: 3}
-  - {fileID: 6867681652711569663, guid: 917b3e362cb87ec4c9f396c33a955af2, type: 3}
-  - {fileID: 679172602310741644, guid: 4ec4cfadebd96154690192fbd49e28b8, type: 3}
-  - {fileID: 8469403779684493934, guid: 296b6c6ad62626c48aef7fa6c5e2a9a8, type: 3}
-  - {fileID: 8460405241369980959, guid: 6fb840e833a0f2049b655aba4bf98513, type: 3}
+  - {fileID: 8712453001704677378, guid: f1bad9ec48cc1e24db6ee6be9b972e3d, type: 3}
+  - {fileID: 6248498986428325664, guid: 00f9b872c9afa00469eee44a49b4303c, type: 3}
+  - {fileID: 8044347638931955797, guid: 7b11c588fd9662647978280986821298, type: 3}
+  - {fileID: 4057282156488648104, guid: cda8fdc4d45e8814bb9222dab3274a98, type: 3}
+  - {fileID: 3918577847208987782, guid: bed70db9957d31845b7e95c82aec1c63, type: 3}
+  - {fileID: 14270602131737455, guid: 19a4816e804b935418ebccd950c58d34, type: 3}
   poolObjectCount: 2

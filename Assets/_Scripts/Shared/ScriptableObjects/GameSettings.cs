@@ -17,7 +17,7 @@ public class GameSettings : ScriptableObject
     {
         get
         {
-           return difficulty[0]; //todo
+           return difficulty[0]; //TO DO
         }
     }
 }
@@ -29,6 +29,9 @@ public class Difficulty
     public bool selected = false;
     [Space]
     [Header("Settings")]
-    public float totalGameMiliseconds = 100;
+    public float totalGameIntervals = 50;
+    [Tooltip("How often will the time be reduced")]
+    public float intervalRange = 0.5f;
     public float spawnRate = 0.5f;
+    public float collisionRadius = 2f;
 }

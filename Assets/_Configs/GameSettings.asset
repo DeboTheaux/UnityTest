@@ -15,13 +15,19 @@ MonoBehaviour:
   difficulty:
   - name: Easy
     selected: 0
-    totalGameMiliseconds: 100
-    spawnRate: 1
+    totalGameIntervals: 300
+    intervalRange: 0.5
+    spawnRate: 0.2
+    collisionRadius: 10
   - name: Medium
     selected: 0
-    totalGameMiliseconds: 10
+    totalGameIntervals: 50
+    intervalRange: 0.5
     spawnRate: 0.5
+    collisionRadius: 2
   - name: Hard
     selected: 0
-    totalGameMiliseconds: 50
+    totalGameIntervals: 50
+    intervalRange: 0.5
     spawnRate: 0.5
+    collisionRadius: 2

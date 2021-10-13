@@ -8,12 +8,12 @@ public class InputCatcher
 
     private readonly ISubject<Vector2> onClick = new Subject<Vector2>();
     private IDisposable clickDisposable;
-    private Transform cameraFieldOfView;
+    private RectTransform canvas;
     private Vector2 pointPosition;
 
     public void Configure()
     {
-        cameraFieldOfView = DependencyProvider.GetDependency<Camera>().transform;//as Transform;      
+        canvas = DependencyProvider.GetDependency<Canvas>().transform as RectTransform;      
     }
 
     public void StartCatchingInput()
@@ -28,7 +28,7 @@ public class InputCatcher
 
     public void OnPointerClick()
     {
-        pointPosition = PointerInCanvas(Input.mousePosition);
+        pointPosition = PointerInCanvas();
         onClick.OnNext(pointPosition);
     }
 
@@ -37,12 +37,6 @@ public class InputCatcher
         clickDisposable.Dispose();
     }
 
-    Vector2 PointerInCanvas(Vector2 position) =>
-            CanvasPosition(NormalizePosition(position));
-
-    Vector2 CanvasPosition(Vector2 normalizedPosition) =>
-            Vector2.Scale(normalizedPosition, cameraFieldOfView.localScale);
-
-    static Vector2 NormalizePosition(Vector2 position) =>
-            new Vector2(position.x / Screen.width, position.y / Screen.height);
+    Vector2 PointerInCanvas() =>
+            Input.mousePosition;
 }

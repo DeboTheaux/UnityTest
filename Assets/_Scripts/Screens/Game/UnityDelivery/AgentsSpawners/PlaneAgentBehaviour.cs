@@ -16,7 +16,6 @@ public class PlaneAgentBehaviour : BehaviourAgent
     public float rayDistanceToGround = 10f;
     public LayerMask layerGround;
 
-    private Life life;
     private Vector3 movement;
     private float z = 0;
     private float z0 = 0; //last position z
@@ -26,11 +25,10 @@ public class PlaneAgentBehaviour : BehaviourAgent
 
     private void Start()
     {
-        life = new Life(totalLife, OnDead);
         ray = new Ray();
 
         movementDisposable = Observable.EveryUpdate()
-                .Where(frame => frame >= delayFrames && life.CurrentLife >= 0)
+                .Where(frame => frame >= delayFrames)
                 .Subscribe(frame =>
                 {
                     Move();
@@ -59,17 +57,6 @@ public class PlaneAgentBehaviour : BehaviourAgent
         ray.direction = Vector3.down;
     }
 
-    private void OnDead()
-    {
-        movementDisposable.Dispose();
-        gameObject.SetActive(false);
-    }
-
-    private void OnDisable()
-    {
-        movementDisposable.Dispose();
-    }
-
     private bool MoveFunctionIsIncreasing()
     {
         var isIncreasing = movement.z > z0;
@@ -77,8 +64,15 @@ public class PlaneAgentBehaviour : BehaviourAgent
         return isIncreasing;
     }
 
-    public override bool IsHittingGround()
+    public override bool IsAvailable()
     {
-        return Physics.Raycast(ray, rayDistanceToGround, layerGround);
+        return IsHittingGround();
     }
+
+    private void OnDisable()
+    {
+        movementDisposable.Dispose();
+    }
+
+    private bool IsHittingGround() => Physics.Raycast(ray, rayDistanceToGround, layerGround);
 }

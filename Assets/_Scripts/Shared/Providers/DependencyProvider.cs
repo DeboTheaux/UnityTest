@@ -20,4 +20,17 @@ public static class DependencyProvider
             throw new Exception($"Dependency {type} not found");
         return (T)dependency;
     }
+
+    public static IScoreService GetScoreService()
+    {
+        var type = typeof(IScoreService);
+        if (!dependencies.TryGetValue(type, out var scoreService))
+        {
+            //We can decide if create a Local or Remote Service..serviceIfEnabled...
+            var enabledScoreService = new LocalScoreService(); 
+            RegisterDependency<IScoreService>(enabledScoreService);
+            return enabledScoreService; 
+        }
+        return (IScoreService)scoreService;
+    }
 }

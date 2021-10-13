@@ -1,19 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!135 &2984504454100589794
-SphereCollider:
+--- !u!65 &4451043977494043128
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7725578914702899167}
+  m_GameObject: {fileID: 4445992531676947344}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.2941193
-  m_Center: {x: -0.000000014901161, y: 0, z: 0}
---- !u!1001 &7725148853065661885
+  m_Size: {x: 1.0000001, y: 1.0000001, z: 1}
+  m_Center: {x: 0.50000006, y: 0.50000006, z: 0.5}
+--- !u!1001 &4445244432253938162
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -22,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1118085362977378, guid: 5527826a6315a224d850675a730c4f62, type: 3}
       propertyPath: m_Name
-      value: Coin
+      value: YellowBlock
       objectReference: {fileID: 0}
     - target: {fileID: 4035765028099436, guid: 5527826a6315a224d850675a730c4f62, type: 3}
       propertyPath: m_RootOrder
@@ -72,37 +72,57 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 167faa9f54383f04987dcacc6372f1b4, type: 2}
+      objectReference: {fileID: 2100000, guid: 940d4c7d3d8f0ff4aab297e184fe9ffd, type: 2}
     - target: {fileID: 33051811110579016, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
       propertyPath: m_Mesh
       value: 
-      objectReference: {fileID: 4300000, guid: b00a06e965af79a4c917d2b450d64c54, type: 3}
+      objectReference: {fileID: 4300000, guid: 6b3e08b19a8a5bc42aca2b30611da807, type: 3}
     - target: {fileID: 424628355512027634, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 1.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 424628355512027634, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
       propertyPath: m_Size.y
-      value: 0.5
+      value: 1.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 424628355512027634, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
-      propertyPath: m_Size.z
+      propertyPath: m_Center.x
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 424628355512027634, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.50000006
+      objectReference: {fileID: 0}
+    - target: {fileID: 424628355512027634, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
+      propertyPath: m_Center.z
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
-      propertyPath: figureId.id
+      propertyPath: scoreToAdd
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
+      propertyPath: figureId.id
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
+      propertyPath: collisionRadius
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5527826a6315a224d850675a730c4f62, type: 3}
---- !u!1 &7725578914702899167 stripped
+--- !u!1 &4445992531676947344 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1118085362977378, guid: 5527826a6315a224d850675a730c4f62,
     type: 3}
-  m_PrefabInstance: {fileID: 7725148853065661885}
+  m_PrefabInstance: {fileID: 4445244432253938162}
   m_PrefabAsset: {fileID: 0}
