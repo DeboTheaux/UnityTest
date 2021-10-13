@@ -135,8 +135,8 @@ public class GamePresenter
     private void IncreaseScore(List<Figure> collidingFigures) =>
        collidingFigures.ForEach(collidingFigure => scoreService.UpdateScore(collidingFigure.ScoreToAdd));
 
-    private void DecreaseScore(List<Figure> collidingFigures) =>
-    collidingFigures.ForEach(collidingFigure => scoreService.UpdateScore(collidingFigure.ScoreToRemove));
+    private void DecreaseScore(List<Figure> recycledFigures) =>
+    recycledFigures.ForEach(recycledFigure => scoreService.UpdateScore(-recycledFigure.ScoreToRemove));
 
     private void RemoveFigures(List<Figure> collidingFigures) =>
         collidingFigures.ForEach(collidingFigure => collidingFigure.DoRecycle());

@@ -26,16 +26,24 @@ TÉCNICA:
 -Figuras van a implementar interfaces
 -Para el click Obserbe pattern
 
-23:25 Jueves 00:45 diseño del juego y arte
-4:35 con errores de editor...
-21:00-5:00
+23:25 Jueves 00:45 diseño del juego y arte [1:10]
+4:35 con errores de editor... [4:00]
+21:00-5:00 [8:00]
+23:00-3:20 [4:20]
+----------------
+17:30
 
-
-//todo:
 Instanciar Figuras YA 01:42
 Agregar Object Pooling LISTO 2:46
-InputHandler del usuario.
-Las Figuras se pueden componer en función de si suman puntos, si restan puntos, etc.
+InputHandler del usuario. Listo
+Las Figuras se pueden componer en función de si suman puntos, si restan puntos, etc. LISTO
+
+//todo:
 Niveles de dificultad
+Configuracion de los niveles de dificultad: chance de spawn de cada objeto, tiempo minimo entre spawns, tiempo maximo entre spawns, 
+cantidad maxima de objetos a spawnear, cantidad minima de objetos a spawnear
+Marca de Target: al hacer click, se spawnean 5 monedas 
+Condicion de ganar y condicion de perder
+Fijarse que se llama al Check solo cuando se hace click y hay cosas que ocurren sin necesidad de hacer click, como restar puntos si los objetos desaparecen.
 Audio Manager
 VFX

@@ -33,5 +33,4 @@ public class Difficulty
     [Tooltip("How often will the time be reduced")]
     public float intervalRange = 0.5f;
     public float spawnRate = 0.5f;
-    public float collisionRadius = 2f;
 }

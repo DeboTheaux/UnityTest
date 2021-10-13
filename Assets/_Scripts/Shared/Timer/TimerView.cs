@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using UniRx;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -20,12 +19,6 @@ public class TimerView : MonoBehaviour
     public int RemainingTime => remainingTime;
     int remainingTime;
     private IDisposable currentTimer;
-   // private ISoundManager soundManager;
-
-    private void Awake()
-    {
-       // soundManager = ServiceLocator.GetServices<ISoundManager>();
-    }
 
     public void StartTimer(int seconds, float interval, Action<long> EveryTick, Action OnTimeOut)
     {
@@ -41,7 +34,6 @@ public class TimerView : MonoBehaviour
         if (currentTimer != null)
         {
             OnStopTimer();
-           // PlayTimerSound(SoundId.TimeOver);
         }
         currentTimer?.Dispose();
     }
@@ -51,7 +43,6 @@ public class TimerView : MonoBehaviour
         remainingTime = (int)(seconds - time);
         if (imageTimer != null) UpdateImage(remainingTime, seconds);
         if (textTimer != null) UpdateText();
-       // if (remainingTime <= 10) PlayTimerSound(SoundId.Timer);
         EveryTick(time);
     }
 
@@ -69,27 +60,4 @@ public class TimerView : MonoBehaviour
         textTimer.text = remainingTime.ToString();
     }
 
-    //void PlayTimerSound(SoundId sound)
-    //{
-    //    soundManager.PlaySound(sound, true, true);
-    //}
-}
-
-
-public class Timer
-{
-    private IDisposable currentTimer;
-
-    public IDisposable Start(double tickSeconds, int seconds, Action<long> EveryTick, Action OnTimeOut)
-    {
-        return currentTimer = Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(tickSeconds))
-             .TakeWhile(t => t <= seconds)
-             .Subscribe(EveryTick, OnTimeOut);
-    }
-
-    public void Stop()
-    {
-        if (currentTimer != null)
-            currentTimer.Dispose();
-    }
 }

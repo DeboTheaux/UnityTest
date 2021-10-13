@@ -5,7 +5,6 @@ public class GameView : MonoBehaviour, IGameView
 {
     [SerializeField] private GameSettings gameSettings;
     [SerializeField] private TimerView timerView;
-    [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private FigureConfiguration configuration;
     [SerializeField] private BehaviourAgent[] spawns;
 

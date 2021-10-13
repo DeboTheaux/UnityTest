@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlaneAgentBehaviour : BehaviourAgent
 {
     [Header("Agent Settings")]
-    public float totalLife;
     [Range(0f,1f)]
     public float speed;
     [Tooltip("amplitude in unity units in the back and forward motion")]
