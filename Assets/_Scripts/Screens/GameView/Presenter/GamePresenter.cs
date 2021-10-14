@@ -12,7 +12,6 @@ public class GamePresenter
     private readonly InputCatcher input;
     private readonly GameSettings gameSettings;
     private readonly FigureFactory figureFactory;
-    private readonly TimerView timerView;
     private readonly SimpleScreenNavigator navigator;
     private readonly List<BehaviourAgent> spawns;
     private float timerSeconds;
@@ -38,7 +37,6 @@ public class GamePresenter
                         InputCatcher input,
                         FigureFactory figureFactory,
                         BehaviourAgent[] spawns,
-                        TimerView timerView,
                         SimpleScreenNavigator navigator)
     {
         this.view = view;
@@ -48,7 +46,6 @@ public class GamePresenter
         this.view = view;
         this.figureFactory = figureFactory;
         this.spawns = spawns.ToList();
-        this.timerView = timerView;
         this.navigator = navigator;
 
         input.Configure();
@@ -63,9 +60,12 @@ public class GamePresenter
         objectsAmountMax = gameSettings.SelectedGameDifficulty.objectsAmountMax;
         objectsAmountMin = gameSettings.SelectedGameDifficulty.objectsAmountMin;
         timerSeconds = gameSettings.SelectedGameDifficulty.totalGameSeconds;
-        totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
 
-        figuresOnScene = RemoveFiguresFromList(recycledFigures).ToList();
+        currentObjectsSpawned = 0;
+        totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
+        spawnStart = 0;
+
+        figuresOnScene.Clear();
     }
 
     public void OnShow()

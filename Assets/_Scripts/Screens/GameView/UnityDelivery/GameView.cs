@@ -16,7 +16,6 @@ public class GameView : MonoBehaviour, IGameView
                                          new InputCatcher(),
                                          new FigureFactory(configuration),
                                          spawns,
-                                         timerView,
                                          DependencyProvider.GetDependency<SimpleScreenNavigator>());
 
     public void Initialize()
