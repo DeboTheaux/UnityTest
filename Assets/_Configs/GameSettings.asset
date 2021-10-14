@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulties:
   - name: Easy
-    selected: 0
+    scoreToWin: 100
     totalGameSeconds: 300
     spawnRateMin: 1
     spawnRateMax: 3
@@ -40,7 +40,7 @@ MonoBehaviour:
         id: YellowBlock
       probability: 20
   - name: Medium
-    selected: 0
+    scoreToWin: 2
     totalGameSeconds: 10
     spawnRateMin: 1
     spawnRateMax: 1

@@ -24,7 +24,6 @@ public class FigureFactory
 
     public Figure CreateFigureById(FigureId id, Transform spawnTransform)
     {
-
         var objectPool = pools[id];
 
         return objectPool.Spawn<Figure>(spawnTransform);
