@@ -20,6 +20,7 @@ public class GamePresenter
     private float spawnRateMax;
     private int objectsAmountMax;
     private int objectsAmountMin;
+    private int scoreToWin;
     private List<FigureSpawnProbability> figuresSpawnProbability;
     private float spawnStart;
     private int totalObjectsToSpawn = 0;
@@ -55,6 +56,7 @@ public class GamePresenter
 
     public void Present()
     {
+        scoreToWin = gameSettings.SelectedGameDifficulty.scoreToWin;
         spawnRateMin = gameSettings.SelectedGameDifficulty.spawnRateMin;
         spawnRateMax = gameSettings.SelectedGameDifficulty.spawnRateMax;
         figuresSpawnProbability = gameSettings.SelectedGameDifficulty.chances;
@@ -189,7 +191,7 @@ public class GamePresenter
 
     private Figure InstantiateRandomFigureWithPosition(Transform transform) => figureFactory.CreateRandom(figuresSpawnProbability, transform);
 
-    private bool UserWon => scoreService.Score >= 100; //gameSettings maybe ...
+    private bool UserWon => scoreService.Score >= scoreToWin;
 
     private void Dispose()
     {

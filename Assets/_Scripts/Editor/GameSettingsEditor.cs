@@ -50,6 +50,7 @@ public class GameSettingsEditor : Editor
 
             SerializedProperty listRef = ThisList.GetArrayElementAtIndex(i);
             SerializedProperty difficultyName = listRef.FindPropertyRelative("name");
+            SerializedProperty scoreToWin = listRef.FindPropertyRelative("scoreToWin");
             SerializedProperty totalGameSeconds = listRef.FindPropertyRelative("totalGameSeconds");
             SerializedProperty spawnRateMin = listRef.FindPropertyRelative("spawnRateMin");
             SerializedProperty spawnRateMax = listRef.FindPropertyRelative("spawnRateMax");
@@ -58,6 +59,7 @@ public class GameSettingsEditor : Editor
             SerializedProperty objectsAmountMax = listRef.FindPropertyRelative("objectsAmountMax");
 
             difficultyName.stringValue = EditorGUILayout.TextField("Difficulty Name", difficultyName.stringValue, GUILayout.MaxWidth(400));
+            scoreToWin.intValue = EditorGUILayout.IntField("Score To Win", scoreToWin.intValue, GUILayout.MaxWidth(400));
             totalGameSeconds.floatValue = EditorGUILayout.FloatField("Total Game Seconds", totalGameSeconds.floatValue, GUILayout.MaxWidth(400));
             EditorGUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Spawn Rate Min");
@@ -131,5 +133,6 @@ public class GameSettingsEditor : Editor
 
         //Apply the changes to our list
         GetTarget.ApplyModifiedProperties();
+        EditorUtility.SetDirty(t);
     }
 }

@@ -41,7 +41,7 @@ public class GameSettings : ScriptableObject
 public class Difficulty
 {
     public string name = "Easy";
-    public bool selected = false;
+    public int scoreToWin = 100;
     public float totalGameSeconds = 50;
     public float spawnRateMin = 0.5f;
     public float spawnRateMax = 1f; //Agregar funcionalidad
