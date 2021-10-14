@@ -26,6 +26,7 @@ public class GameView : MonoBehaviour, IGameView
     public void Show()
     {
         presenter.OnShow();
+        Debug.Log($"Selected Difficulty: {gameSettings.SelectedGameDifficulty.name}");
         gameObject.SetActive(true);
     }
 
@@ -38,4 +39,5 @@ public class GameView : MonoBehaviour, IGameView
     {
         timerView.StartTimer((int)withSeconds, (_) => presenter.EveryTimeTick(_), () => presenter.OnTimeOut());
     }
+
 }

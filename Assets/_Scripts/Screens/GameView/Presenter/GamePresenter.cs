@@ -16,8 +16,14 @@ public class GamePresenter
     private readonly List<BehaviourAgent> spawns;
     private readonly float spawnRateMin;
     private readonly float spawnRateMax;
-    private readonly List<FigureSpawnProbability> chances;
+    private readonly int objectsAmountMax;
+    private readonly int objectsAmountMin;
+    private readonly List<FigureSpawnProbability> figuresSpawnProbability;
     private float spawnStart;
+    private int totalObjectsToSpawn = 0;
+    private int currentObjectsSpawned = 0;
+    private List<Figure> collidingFigures = new List<Figure>();
+    private List<Figure> recycledFigures = new List<Figure>();
     private List<Figure> figuresOnScene = new List<Figure>();
 
     private CompositeDisposable disposable = new CompositeDisposable();
@@ -34,14 +40,18 @@ public class GamePresenter
         this.view = view;
         this.scoreService = scoreService;
         this.input = input;
-        this.timerSeconds = gameSettings.GameDifficulty.totalGameSeconds;
+        this.timerSeconds = gameSettings.SelectedGameDifficulty.totalGameSeconds;
         this.view = view;
         this.figureFactory = figureFactory;
         this.spawns = spawns.ToList();
         this.timerView = timerView;
-        this.spawnRateMin = gameSettings.GameDifficulty.spawnRateMin;
-        this.spawnRateMax = gameSettings.GameDifficulty.spawnRateMax;
-        this.chances = gameSettings.GameDifficulty.chances;
+        this.spawnRateMin = gameSettings.SelectedGameDifficulty.spawnRateMin;
+        this.spawnRateMax = gameSettings.SelectedGameDifficulty.spawnRateMax;
+        this.figuresSpawnProbability = gameSettings.SelectedGameDifficulty.chances;
+        this.objectsAmountMax = gameSettings.SelectedGameDifficulty.objectsAmountMax;
+        this.objectsAmountMin = gameSettings.SelectedGameDifficulty.objectsAmountMin;
+
+        totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
 
         input.Configure();
     }
@@ -58,34 +68,38 @@ public class GamePresenter
         CatchOnClickUserInput();
     }
 
-    public void EveryTimeTick(long tick)
+    public void EveryTimeTick(long time)
     {
-        SpawnOnEveryTickUntilNoRemainingTime(tick);
-    }
+        CheckRecycleFigures();
 
-    private void Spawn(long time)
-    {
-        if (TimeHasPassedSinceLastSpawn(time))
+        if (TimeHasPassedSinceLastSpawn(time) && HasObjectToSpawn)
         {
             SelectAgentToSpawn();
             UpdateLastSpawnTime(time);
         }
+        else if (!HasObjectToSpawn)
+        {
+            GameResult();
+        }
+    }
+
+    private void CheckRecycleFigures()
+    {
+        recycledFigures = RecycledFigures().ToList();
+        DecreaseScore(recycledFigures);
+        figuresOnScene = RemoveFiguresFromList(recycledFigures).ToList();
     }
 
     private void OnUserInputCatch(Vector2 input)
     {
-        CheckCollisionsAndRecycleFigures(input);
+        CheckCollisionsFigures(input);
     }
 
-    private void CheckCollisionsAndRecycleFigures(Vector2 mousePosition)
+    private void CheckCollisionsFigures(Vector2 mousePosition)
     {
-        var collidingFigures = CollidingFigures(mousePosition).ToList();
-        var recycledFigures = RecycledFigures().ToList();
-
+        collidingFigures = CollidingFigures(mousePosition).ToList();
         IncreaseScore(collidingFigures);
-        DecreaseScore(recycledFigures);
-
-        figuresOnScene = RemoveFiguresFromList(collidingFigures, recycledFigures).ToList();
+        figuresOnScene = RemoveFiguresFromList(collidingFigures).ToList();
         RemoveFigures(collidingFigures);
     }
 
@@ -97,7 +111,14 @@ public class GamePresenter
 
     public void OnTimeOut()
     {
+        GameResult();
         Dispose();
+    }
+
+    private void GameResult()
+    {
+        //Check if Win Or Loose
+        Debug.Log("Time Out");
     }
 
     private bool TimeHasPassedSinceLastSpawn(long time) => spawnStart < time;
@@ -105,8 +126,6 @@ public class GamePresenter
     private void UpdateLastSpawnTime(long time) => spawnStart = time + RandomSpawnRate;
 
     private float RandomSpawnRate => UnityEngine.Random.Range(spawnRateMin, spawnRateMax);
-
-    private void SpawnOnEveryTickUntilNoRemainingTime(long tick) => Spawn(tick);
 
     private IEnumerable<BehaviourAgent> SelectAvailableAgents => spawns.Where(agent => agent.IsAvailable);
 
@@ -117,18 +136,21 @@ public class GamePresenter
              .Subscribe(OnUserInputCatch)
              .AddTo(disposable);
 
-    private Figure InstantiateRandomFigureWithPosition(Transform transform) => figureFactory.CreateRandom(transform);
+    private bool HasObjectToSpawn => ObjectsSpawned < totalObjectsToSpawn;
+
+    private int GetRandomNumberOfObjectsToSpawn => UnityEngine.Random.Range(objectsAmountMin, objectsAmountMax);
+    private int ObjectsSpawned => currentObjectsSpawned;
+    private int IncreaseObjectsSpawned() => ++currentObjectsSpawned;
 
     private IEnumerable<Figure> CollidingFigures(Vector2 mousePosition) =>
          figuresOnScene.Where(figure => figure.CheckCollision(mousePosition));
 
     private IEnumerable<Figure> RecycledFigures() =>
-        figuresOnScene.Where(figure => figure.IsRecycled());
+        figuresOnScene.Where(figure => figure.IsRecycled);
 
-    private IEnumerable<Figure> RemoveFiguresFromList(IEnumerable<Figure> collidingFigures, IEnumerable<Figure> recycledFigures) =>
+    private IEnumerable<Figure> RemoveFiguresFromList(IEnumerable<Figure> figures) =>
         figuresOnScene
-        .Except(collidingFigures)
-        .Except(recycledFigures).ToList();
+        .Except(figures).ToList();
 
     private void IncreaseScore(List<Figure> collidingFigures) =>
        collidingFigures.ForEach(collidingFigure => scoreService.UpdateScore(collidingFigure.ScoreToAdd));
@@ -149,10 +171,13 @@ public class GamePresenter
             {
                 if (!isHitting) return;
                 var newFigure = InstantiateRandomFigureWithPosition(agent.transform);
+                IncreaseObjectsSpawned();
                 figuresOnScene.Add(newFigure);
                 agent.CompleteSpawn();
             }, DisposeSpawner);
         });
+
+    private Figure InstantiateRandomFigureWithPosition(Transform transform) => figureFactory.CreateRandom(figuresSpawnProbability, transform);
 
     private void Dispose()
     {

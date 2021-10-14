@@ -10,16 +10,18 @@ public class Figure : RecyclableObject //implementar interfaces...?
     [SerializeField] private float collisionRadius = 10f;
     [SerializeField] private float clicksToDisappear = 1f;
     [SerializeField] private float timeToDisappear = 5f;
+    [SerializeField] private Rigidbody rigidbodyComponent;
 
     public FigureId Id => figureId;
     public int ScoreToAdd => scoreToAdd;
     public int ScoreToRemove => scoreToRemove;
-    public bool IsRecycled() => isRecycled;
+    public bool IsRecycled => isRecycled;
 
     private int click = 0;
 
     internal override void Init()
     {
+        rigidbodyComponent.velocity = Vector3.zero;
         click = 0;
         isRecycled = false;
         Invoke("Recycle", timeToDisappear); //TODO

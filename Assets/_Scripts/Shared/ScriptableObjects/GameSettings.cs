@@ -4,19 +4,23 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //https://forum.unity.com/threads/display-a-list-class-with-a-custom-editor-script.227847/
-[CreateAssetMenu(menuName = "Game/Settings", fileName ="GameSettings")]
+[CreateAssetMenu(menuName = "Game/Settings", fileName = "GameSettings")]
 public class GameSettings : ScriptableObject
 {
-   public List<Difficulty> difficulty;
+    public List<Difficulty> difficulties;
+    private int difficultySelectedIndex = 0;
+
+    public void SetDifficultySelectedIndex(int index) => difficultySelectedIndex = index;
+
 
     private void AddNew()
     {
-        difficulty.Add(new Difficulty());
+        difficulties.Add(new Difficulty());
     }
 
     private void Remove(int index)
     {
-        difficulty.RemoveAt(index);
+        difficulties.RemoveAt(index);
     }
 
     public GameSettings()
@@ -24,11 +28,11 @@ public class GameSettings : ScriptableObject
         DependencyProvider.RegisterDependency<GameSettings>(this);
     }
 
-    public Difficulty GameDifficulty
+    public Difficulty SelectedGameDifficulty
     {
         get
         {
-           return difficulty[0]; //TO DO
+            return difficulties[difficultySelectedIndex];
         }
     }
 }
@@ -41,6 +45,8 @@ public class Difficulty
     public float totalGameSeconds = 50;
     public float spawnRateMin = 0.5f;
     public float spawnRateMax = 1f; //Agregar funcionalidad
+    public int objectsAmountMax = 10;
+    public int objectsAmountMin = 10;
     public List<FigureSpawnProbability> chances = new List<FigureSpawnProbability>();
 }
 

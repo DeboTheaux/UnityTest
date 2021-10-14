@@ -15,6 +15,6 @@ public class MainMenuPresenter
 
     public void OnPlayButtonClick()
     {
-        navigator.ShowScreen<IGameView>();   
+        navigator.ShowScreen<IDifficultySelectorView>();   
     }
 }

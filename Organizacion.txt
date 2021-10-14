@@ -41,11 +41,11 @@ InputHandler del usuario. Listo
 Las Figuras se pueden componer en función de si suman puntos, si restan puntos, etc. LISTO
 
 //todo:
-Niveles de dificultad
-Configuracion de los niveles de dificultad: chance de spawn de cada objeto, tiempo minimo entre spawns, tiempo maximo entre spawns, 
+Niveles de dificultad YA
+Configuracion de los niveles de dificultad: chance de spawn de cada objeto, tiempo minimo entre spawns, tiempo maximo entre spawns, YA
 cantidad maxima de objetos a spawnear, cantidad minima de objetos a spawnear
 Marca de Target: al hacer click, se spawnean 5 monedas 
 Condicion de ganar y condicion de perder
-Fijarse que se llama al Check solo cuando se hace click y hay cosas que ocurren sin necesidad de hacer click, como restar puntos si los objetos desaparecen.
+Fijarse que se llama al Check solo cuando se hace click y hay cosas que ocurren sin necesidad de hacer click, como restar puntos si los objetos desaparecen. YA
 Audio Manager
 VFX

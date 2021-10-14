@@ -17,7 +17,7 @@ public class GameSettingsEditor : Editor
     {
         t = (GameSettings)target;
         GetTarget = new SerializedObject(t);
-        ThisList = GetTarget.FindProperty("difficulty"); // Find the List in our script and create a refrence of it
+        ThisList = GetTarget.FindProperty("difficulties"); // Find the List in our script and create a refrence of it
     }
 
     public override void OnInspectorGUI()
@@ -54,7 +54,9 @@ public class GameSettingsEditor : Editor
             SerializedProperty spawnRateMin = listRef.FindPropertyRelative("spawnRateMin");
             SerializedProperty spawnRateMax = listRef.FindPropertyRelative("spawnRateMax");
             SerializedProperty listOfChances = listRef.FindPropertyRelative("chances");
-           
+            SerializedProperty objectsAmountMin = listRef.FindPropertyRelative("objectsAmountMin");
+            SerializedProperty objectsAmountMax = listRef.FindPropertyRelative("objectsAmountMax");
+
             difficultyName.stringValue = EditorGUILayout.TextField("Difficulty Name", difficultyName.stringValue, GUILayout.MaxWidth(400));
             totalGameSeconds.floatValue = EditorGUILayout.FloatField("Total Game Seconds", totalGameSeconds.floatValue, GUILayout.MaxWidth(400));
             EditorGUILayout.BeginHorizontal();
@@ -65,6 +67,8 @@ public class GameSettingsEditor : Editor
             EditorGUILayout.LabelField("Spawn Rate Max");
             spawnRateMax.floatValue = EditorGUILayout.Slider(spawnRateMax.floatValue, 1, totalGameSeconds.floatValue, GUILayout.MaxWidth(400));
             EditorGUILayout.EndHorizontal();
+            objectsAmountMin.intValue = EditorGUILayout.IntField("Min Amount Objects", objectsAmountMin.intValue, GUILayout.MaxWidth(400));
+            objectsAmountMax.intValue = EditorGUILayout.IntField("Max Amount Objects", objectsAmountMax.intValue, GUILayout.MaxWidth(400));
 
             // Array fields with remove at index
             EditorGUILayout.Space();
@@ -121,7 +125,7 @@ public class GameSettingsEditor : Editor
         GUI.backgroundColor = Color.green;
         if (GUILayout.Button("Add new Game Diffculty"))
         {
-            t.difficulty.Add(new Difficulty());
+            t.difficulties.Add(new Difficulty());
         }
 
 

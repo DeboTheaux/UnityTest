@@ -12,25 +12,56 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb0293ff9aaa3494f97a18c6a426be6b, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  difficulty:
+  difficulties:
   - name: Easy
-    selected: 1
-    totalGameSeconds: 50
+    selected: 0
+    totalGameSeconds: 300
     spawnRateMin: 1
-    spawnRateMax: 1
+    spawnRateMax: 3
+    objectsAmountMax: 100
+    objectsAmountMin: 65
     chances:
     - FigureId:
         id: BlueSphere
-      probability: 30
+      probability: 20
     - FigureId:
         id: Coin
-      probability: 30
+      probability: 10
     - FigureId:
         id: RedBox
-      probability: 20
+      probability: 0
     - FigureId:
         id: Shield
       probability: 5
     - FigureId:
         id: TargetMark
       probability: 5
+    - FigureId:
+        id: YellowBlock
+      probability: 20
+  - name: Medium
+    selected: 0
+    totalGameSeconds: 300
+    spawnRateMin: 1
+    spawnRateMax: 5
+    objectsAmountMax: 85
+    objectsAmountMin: 65
+    chances:
+    - FigureId:
+        id: BlueSphere
+      probability: 20
+    - FigureId:
+        id: Coin
+      probability: 10
+    - FigureId:
+        id: RedBox
+      probability: 40
+    - FigureId:
+        id: Shield
+      probability: 5
+    - FigureId:
+        id: TargetMark
+      probability: 10
+    - FigureId:
+        id: YellowBlock
+      probability: 20

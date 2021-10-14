@@ -116,3 +116,4 @@ MonoBehaviour:
   collisionRadius: 10
   clicksToDisappear: 1
   timeToDisappear: 5
+  rigidbodyComponent: {fileID: -8475585344991325940}

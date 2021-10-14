@@ -39,4 +39,23 @@ public class FigureFactory
 
         return currentFigure;
     }
+
+
+    public Figure CreateRandom(List<FigureSpawnProbability> probabilities, Transform spawnTransform)
+    {
+        var sumProbabilities = 0f;
+
+        probabilities.ToList().ForEach(figure => sumProbabilities += figure.probability);
+
+        var randomProb = Random.Range(0, sumProbabilities);
+
+        foreach(var figure in probabilities)
+        {
+            if (figure.probability > randomProb)
+              return CreateFigureById(figure.FigureId, spawnTransform);
+            randomProb -= figure.probability;
+        }
+
+        return null;
+    }
 }
