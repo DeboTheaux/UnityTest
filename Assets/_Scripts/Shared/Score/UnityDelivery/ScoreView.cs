@@ -15,6 +15,11 @@ public class ScoreView : MonoBehaviour, IScoreView
         presenter = Present();
     }
 
+    private void OnEnable()
+    {
+        presenter.Present();
+    }
+
     public void ShowScore(float score, float record)
     {
         scoreText.text = $"Score: {score}, Record: {record}";
@@ -22,6 +27,6 @@ public class ScoreView : MonoBehaviour, IScoreView
 
     private void OnDisable()
     {
-        presenter.Dispose();
+      //  presenter.Dispose();
     }
 }

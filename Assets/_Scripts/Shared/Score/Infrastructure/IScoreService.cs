@@ -6,4 +6,5 @@ public interface IScoreService
     float Score { get; }
     float ScoreRecord { get; }
     IObservable<float> OnScoreValueChange { get; }
+    void ResetCurrentScore();
 }

@@ -3,4 +3,5 @@
 public interface IGameView : IScreen
 {
     void StartTimer(float withSeconds);
+    void StopTimer();
 }

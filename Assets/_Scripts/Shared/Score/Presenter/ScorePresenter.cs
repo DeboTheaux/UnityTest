@@ -11,8 +11,13 @@ public class ScorePresenter
     {
         this.view = view;
         this.scoreService = scoreService;
+    }
 
-        view.ShowScore(0, scoreService.ScoreRecord);
+    public void Present()
+    {
+        scoreService.ResetCurrentScore();
+
+        view.ShowScore(scoreService.Score, scoreService.ScoreRecord);
 
         scoreService.OnScoreValueChange
             .Subscribe(UpdateScore)

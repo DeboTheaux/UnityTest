@@ -41,9 +41,9 @@ MonoBehaviour:
       probability: 20
   - name: Medium
     selected: 0
-    totalGameSeconds: 300
+    totalGameSeconds: 10
     spawnRateMin: 1
-    spawnRateMax: 5
+    spawnRateMax: 1
     objectsAmountMax: 85
     objectsAmountMin: 65
     chances:

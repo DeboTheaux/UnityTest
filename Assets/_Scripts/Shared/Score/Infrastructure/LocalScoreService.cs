@@ -19,6 +19,11 @@ public class LocalScoreService : IScoreService
         cachedScoreRecord = PlayerPrefs.GetFloat(SCOREKEY, 0);
     }
 
+    public void ResetCurrentScore()
+    {
+        currentScore = 0;
+    }
+
     public void UpdateScore(float scoreIncrement)
     {
         currentScore += scoreIncrement;

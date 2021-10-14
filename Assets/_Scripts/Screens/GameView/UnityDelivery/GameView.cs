@@ -16,7 +16,8 @@ public class GameView : MonoBehaviour, IGameView
                                          new InputCatcher(),
                                          new FigureFactory(configuration),
                                          spawns,
-                                         timerView);
+                                         timerView,
+                                         DependencyProvider.GetDependency<SimpleScreenNavigator>());
 
     public void Initialize()
     {
@@ -25,6 +26,7 @@ public class GameView : MonoBehaviour, IGameView
 
     public void Show()
     {
+        presenter.Present();
         presenter.OnShow();
         Debug.Log($"Selected Difficulty: {gameSettings.SelectedGameDifficulty.name}");
         gameObject.SetActive(true);
@@ -38,6 +40,11 @@ public class GameView : MonoBehaviour, IGameView
     public void StartTimer(float withSeconds)
     {
         timerView.StartTimer((int)withSeconds, (_) => presenter.EveryTimeTick(_), () => presenter.OnTimeOut());
+    }
+
+    public void StopTimer()
+    {
+        timerView.Stop();
     }
 
 }

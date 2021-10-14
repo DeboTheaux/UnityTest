@@ -4,6 +4,7 @@ using UnityEngine;
 public class MainMenuView : MonoBehaviour, IMainMenuView
 {
     [SerializeField] private Button playButton;
+    [SerializeField] private Button exitButton;
 
     MainMenuPresenter presenter;
 
@@ -15,6 +16,7 @@ public class MainMenuView : MonoBehaviour, IMainMenuView
         presenter = Presenter();
 
         playButton.onClick.AddListener(() => presenter.OnPlayButtonClick());
+        exitButton.onClick.AddListener(() => Application.Quit());
     }
 
     public void Show()

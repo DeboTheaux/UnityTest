@@ -9,16 +9,18 @@ public class GamePresenter
 {
     private readonly IGameView view;
     private readonly IScoreService scoreService;
-    private readonly float timerSeconds;
     private readonly InputCatcher input;
+    private readonly GameSettings gameSettings;
     private readonly FigureFactory figureFactory;
     private readonly TimerView timerView;
+    private readonly SimpleScreenNavigator navigator;
     private readonly List<BehaviourAgent> spawns;
-    private readonly float spawnRateMin;
-    private readonly float spawnRateMax;
-    private readonly int objectsAmountMax;
-    private readonly int objectsAmountMin;
-    private readonly List<FigureSpawnProbability> figuresSpawnProbability;
+    private float timerSeconds;
+    private float spawnRateMin;
+    private float spawnRateMax;
+    private int objectsAmountMax;
+    private int objectsAmountMin;
+    private List<FigureSpawnProbability> figuresSpawnProbability;
     private float spawnStart;
     private int totalObjectsToSpawn = 0;
     private int currentObjectsSpawned = 0;
@@ -35,25 +37,33 @@ public class GamePresenter
                         InputCatcher input,
                         FigureFactory figureFactory,
                         BehaviourAgent[] spawns,
-                        TimerView timerView)
+                        TimerView timerView,
+                        SimpleScreenNavigator navigator)
     {
         this.view = view;
         this.scoreService = scoreService;
         this.input = input;
-        this.timerSeconds = gameSettings.SelectedGameDifficulty.totalGameSeconds;
+        this.gameSettings = gameSettings;
         this.view = view;
         this.figureFactory = figureFactory;
         this.spawns = spawns.ToList();
         this.timerView = timerView;
-        this.spawnRateMin = gameSettings.SelectedGameDifficulty.spawnRateMin;
-        this.spawnRateMax = gameSettings.SelectedGameDifficulty.spawnRateMax;
-        this.figuresSpawnProbability = gameSettings.SelectedGameDifficulty.chances;
-        this.objectsAmountMax = gameSettings.SelectedGameDifficulty.objectsAmountMax;
-        this.objectsAmountMin = gameSettings.SelectedGameDifficulty.objectsAmountMin;
-
-        totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
+        this.navigator = navigator;
 
         input.Configure();
+    }
+
+    public void Present()
+    {
+        spawnRateMin = gameSettings.SelectedGameDifficulty.spawnRateMin;
+        spawnRateMax = gameSettings.SelectedGameDifficulty.spawnRateMax;
+        figuresSpawnProbability = gameSettings.SelectedGameDifficulty.chances;
+        objectsAmountMax = gameSettings.SelectedGameDifficulty.objectsAmountMax;
+        objectsAmountMin = gameSettings.SelectedGameDifficulty.objectsAmountMin;
+        timerSeconds = gameSettings.SelectedGameDifficulty.totalGameSeconds;
+        totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
+
+        figuresOnScene = RemoveFiguresFromList(recycledFigures).ToList();
     }
 
     public void OnShow()
@@ -79,7 +89,7 @@ public class GamePresenter
         }
         else if (!HasObjectToSpawn)
         {
-            GameResult();
+            GameResult(UserWon ? "Game Win!" : "Game Over");
         }
     }
 
@@ -111,14 +121,14 @@ public class GamePresenter
 
     public void OnTimeOut()
     {
-        GameResult();
-        Dispose();
+        GameResult(UserWon ? "Game Win!" : "Game Over");
     }
 
-    private void GameResult()
+    private void GameResult(string result)
     {
-        //Check if Win Or Loose
-        Debug.Log("Time Out");
+        view.StopTimer();
+        var popUp = navigator.ShowPopUp<IGameResultPopUpView>();
+        popUp.ShowPopUpWithResult(result);
     }
 
     private bool TimeHasPassedSinceLastSpawn(long time) => spawnStart < time;
@@ -178,6 +188,8 @@ public class GamePresenter
         });
 
     private Figure InstantiateRandomFigureWithPosition(Transform transform) => figureFactory.CreateRandom(figuresSpawnProbability, transform);
+
+    private bool UserWon => scoreService.Score >= 100; //gameSettings maybe ...
 
     private void Dispose()
     {
