@@ -83,6 +83,11 @@ PrefabInstance:
       propertyPath: scoreToAdd
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
+      propertyPath: figureId.id
+      value: BlueSphere
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5527826a6315a224d850675a730c4f62, type: 3}
 --- !u!1 &5001595345630349565 stripped

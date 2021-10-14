@@ -59,5 +59,10 @@ public class Figure : RecyclableObject //implementar interfaces...?
 [Serializable]
 public struct FigureId // no problem if I change from int to string or to an enum...
 {
-    public int id;
+    public string id;
+
+    public override string ToString()
+    {
+        return id;
+    }
 }

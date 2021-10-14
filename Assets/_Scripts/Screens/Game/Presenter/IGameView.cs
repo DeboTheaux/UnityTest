@@ -2,5 +2,5 @@
 
 public interface IGameView : IScreen
 {
-    void StartTimer(float withSeconds, float interval);
+    void StartTimer(float withSeconds);
 }

@@ -20,13 +20,13 @@ public class TimerView : MonoBehaviour
     int remainingTime;
     private IDisposable currentTimer;
 
-    public void StartTimer(int seconds, float interval, Action<long> EveryTick, Action OnTimeOut)
+    public void StartTimer(int seconds, Action<long> EveryTick, Action OnTimeOut)
     {
         OnStartTimer();
         this.seconds = seconds;
         remainingTime = seconds;
         this.EveryTick += EveryTick;
-        currentTimer = new Timer().Start(interval, seconds, UpdateTime, OnTimeOut);
+        currentTimer = new Timer().Start(1, seconds, UpdateTime, OnTimeOut);
     }
 
     public void Stop()

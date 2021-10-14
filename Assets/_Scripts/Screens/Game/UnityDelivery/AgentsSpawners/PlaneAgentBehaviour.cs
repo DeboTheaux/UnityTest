@@ -11,29 +11,30 @@ public class PlaneAgentBehaviour : BehaviourAgent
     public float amplitude;
     public float degreesYRotationPositive;
     public float degreesYRotationNegative;
-    public float delayFrames;
     public float rayDistanceToGround = 10f;
     public LayerMask layerGround;
 
     private Vector3 movement;
     private float z = 0;
-    private float z0 = 0; //last position z
+    private float z0 = -1; //last position z
     private float degrees = 0;
     private IDisposable movementDisposable;
-    private Ray ray;
+    private Ray ray = new Ray();
+    private bool isSpawning = false;
+    private Quaternion lastRotation = new Quaternion();
+    private Subject<bool> isHittingGround = new Subject<bool>();
 
-    private void Start()
+    public override void MoveToSpawn()
     {
-        ray = new Ray();
-
         movementDisposable = Observable.EveryUpdate()
-                .Where(frame => frame >= delayFrames)
                 .Subscribe(frame =>
                 {
+                    isHittingGround.ResetSubject();
+                    isSpawning = true;
                     Move();
                     Rotate();
                     DetectGround();
-                });
+                }, Dispose);
     }
 
     private void Move()
@@ -45,33 +46,48 @@ public class PlaneAgentBehaviour : BehaviourAgent
 
     private void Rotate()
     {
-        degrees = MoveFunctionIsIncreasing() ? degreesYRotationPositive : degreesYRotationNegative;
+        degrees = FunctionIsIncreasing() ? 
+            degreesYRotationPositive : 
+            degreesYRotationNegative;
+
         var rotateTo = new Vector3(transform.rotation.x, degrees, transform.rotation.z);
         transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, rotateTo, 1);
+
+        if(RotationChange())
+        {
+            isSpawning = false;
+            Dispose();
+        }
     }
 
     private void DetectGround()
     {
         ray.origin = transform.position;
         ray.direction = Vector3.down;
+        isHittingGround.OnNext(Physics.Raycast(ray, rayDistanceToGround, layerGround) && IsSpawning);
     }
 
-    private bool MoveFunctionIsIncreasing()
+    private bool FunctionIsIncreasing()
     {
         var isIncreasing = movement.z > z0;
         z0 = movement.z;
         return isIncreasing;
     }
 
-    public override bool IsAvailable()
+    private bool RotationChange()
     {
-        return IsHittingGround();
+        bool hasChangeRotation = !(lastRotation == transform.rotation);
+        lastRotation = transform.rotation;
+        return hasChangeRotation;
     }
 
-    private void OnDisable()
+    public override bool IsAvailable => !IsSpawning;
+    public override IObservable<bool> IsHittingGround => isHittingGround;
+    private bool IsSpawning => isSpawning;
+    public override void CompleteSpawn() => isHittingGround.OnCompleted();
+
+    private void Dispose()
     {
         movementDisposable.Dispose();
     }
-
-    private bool IsHittingGround() => Physics.Raycast(ray, rayDistanceToGround, layerGround);
 }

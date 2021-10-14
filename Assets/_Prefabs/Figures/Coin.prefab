@@ -96,7 +96,7 @@ PrefabInstance:
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
       propertyPath: figureId.id
-      value: 1
+      value: Coin
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5527826a6315a224d850675a730c4f62, type: 3}

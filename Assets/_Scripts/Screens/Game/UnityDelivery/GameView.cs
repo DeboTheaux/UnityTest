@@ -34,8 +34,8 @@ public class GameView : MonoBehaviour, IGameView
         gameObject.SetActive(false);
     }
 
-    public void StartTimer(float withSeconds, float interval)
+    public void StartTimer(float withSeconds)
     {
-        timerView.StartTimer((int)withSeconds, interval, (_) => presenter.EveryTimeTick(_), () => presenter.OnTimeOut());
+        timerView.StartTimer((int)withSeconds, (_) => presenter.EveryTimeTick(_), () => presenter.OnTimeOut());
     }
 }

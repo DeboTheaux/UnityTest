@@ -14,12 +14,14 @@ public class GamePresenter
     private readonly FigureFactory figureFactory;
     private readonly TimerView timerView;
     private readonly List<BehaviourAgent> spawns;
-    private float timeIntervalInSeconds;
-    private float spawnRate;
+    private readonly float spawnRateMin;
+    private readonly float spawnRateMax;
+    private readonly List<FigureSpawnProbability> chances;
     private float spawnStart;
     private List<Figure> figuresOnScene = new List<Figure>();
 
     private CompositeDisposable disposable = new CompositeDisposable();
+    private IDisposable spawnerDisposable;
 
     public GamePresenter(IGameView view,
                         IScoreService scoreService,
@@ -32,13 +34,14 @@ public class GamePresenter
         this.view = view;
         this.scoreService = scoreService;
         this.input = input;
-        this.timerSeconds = gameSettings.GameDifficulty.totalGameIntervals;
+        this.timerSeconds = gameSettings.GameDifficulty.totalGameSeconds;
         this.view = view;
         this.figureFactory = figureFactory;
         this.spawns = spawns.ToList();
         this.timerView = timerView;
-        this.spawnRate = gameSettings.GameDifficulty.spawnRate;
-        this.timeIntervalInSeconds = gameSettings.GameDifficulty.intervalRange;
+        this.spawnRateMin = gameSettings.GameDifficulty.spawnRateMin;
+        this.spawnRateMax = gameSettings.GameDifficulty.spawnRateMax;
+        this.chances = gameSettings.GameDifficulty.chances;
 
         input.Configure();
     }
@@ -64,8 +67,8 @@ public class GamePresenter
     {
         if (TimeHasPassedSinceLastSpawn(time))
         {
-            SpawnNewFigure();
-            UpdateLastSpawnTime();
+            SelectAgentToSpawn();
+            UpdateLastSpawnTime(time);
         }
     }
 
@@ -86,16 +89,10 @@ public class GamePresenter
         RemoveFigures(collidingFigures);
     }
 
-    private void SpawnNewFigure()
+    private void SelectAgentToSpawn()
     {
-        foreach (var spawn in spawns)
-        {
-            if (spawn.IsAvailable())
-            {
-                var newFigure = InstantiateRandomFigureWithPosition(spawn.transform);
-                figuresOnScene.Add(newFigure);
-            }
-        }
+        var availableAgents = SelectAvailableAgents;
+        WaitForAgentToHitGround(availableAgents);       
     }
 
     public void OnTimeOut()
@@ -105,14 +102,15 @@ public class GamePresenter
 
     private bool TimeHasPassedSinceLastSpawn(long time) => spawnStart < time;
 
-    private void UpdateLastSpawnTime() => spawnStart = Time.time + spawnRate;
+    private void UpdateLastSpawnTime(long time) => spawnStart = time + RandomSpawnRate;
 
-    private void SpawnOnEveryTickUntilNoRemainingTime(long tick)
-    {
-        if (timerView.RemainingTime > 0) Spawn(tick);
-    }
+    private float RandomSpawnRate => UnityEngine.Random.Range(spawnRateMin, spawnRateMax);
 
-    private void StartTimerWithSeconds(float seconds) => view.StartTimer(seconds, timeIntervalInSeconds);
+    private void SpawnOnEveryTickUntilNoRemainingTime(long tick) => Spawn(tick);
+
+    private IEnumerable<BehaviourAgent> SelectAvailableAgents => spawns.Where(agent => agent.IsAvailable);
+
+    private void StartTimerWithSeconds(float seconds) => view.StartTimer(seconds);
 
     private void CatchOnClickUserInput() =>
         input.OnClick
@@ -142,10 +140,29 @@ public class GamePresenter
         collidingFigures.ForEach(collidingFigure => collidingFigure.DoRecycle());
 
 
+    private void WaitForAgentToHitGround(IEnumerable<BehaviourAgent> availableAgents) =>  
+        availableAgents.Take(1).ToList().ForEach(agent =>
+        {
+            agent.MoveToSpawn();
+            spawnerDisposable = agent.IsHittingGround
+            .Subscribe(isHitting =>
+            {
+                if (!isHitting) return;
+                var newFigure = InstantiateRandomFigureWithPosition(agent.transform);
+                figuresOnScene.Add(newFigure);
+                agent.CompleteSpawn();
+            }, DisposeSpawner);
+        });
+
     private void Dispose()
     {
         input.Dispose();
         disposable.Dispose();
+    }
+
+    private void DisposeSpawner()
+    {
+        spawnerDisposable.Dispose();
     }
 
 }

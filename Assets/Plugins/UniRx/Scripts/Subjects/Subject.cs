@@ -9,7 +9,7 @@ namespace UniRx
     {
         object observerLock = new object();
 
-        bool isStopped;
+        public bool isStopped;
         bool isDisposed;
         Exception lastError;
         IObserver<T> outObserver = EmptyObserver<T>.Instance;

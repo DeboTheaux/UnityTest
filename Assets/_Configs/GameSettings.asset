@@ -14,20 +14,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   difficulty:
   - name: Easy
-    selected: 0
-    totalGameIntervals: 300
-    intervalRange: 0.5
-    spawnRate: 0.2
-    collisionRadius: 10
-  - name: Medium
-    selected: 0
-    totalGameIntervals: 50
-    intervalRange: 0.5
-    spawnRate: 0.5
-    collisionRadius: 2
-  - name: Hard
-    selected: 0
-    totalGameIntervals: 50
-    intervalRange: 0.5
-    spawnRate: 0.5
-    collisionRadius: 2
+    selected: 1
+    totalGameSeconds: 50
+    spawnRateMin: 1
+    spawnRateMax: 1
+    chances:
+    - FigureId:
+        id: BlueSphere
+      probability: 30
+    - FigureId:
+        id: Coin
+      probability: 30
+    - FigureId:
+        id: RedBox
+      probability: 20
+    - FigureId:
+        id: Shield
+      probability: 5
+    - FigureId:
+        id: TargetMark
+      probability: 5

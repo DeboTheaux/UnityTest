@@ -87,7 +87,7 @@ PrefabInstance:
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
       propertyPath: figureId.id
-      value: 3
+      value: Shield
       objectReference: {fileID: 0}
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
