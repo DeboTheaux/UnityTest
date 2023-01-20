@@ -489,7 +489,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainCamera: {fileID: 963194227}
   gameCanvas: {fileID: 163507186}
-  gameViewsContainer: {fileID: 738518732}
+  framePaths:
+  - Id: MainMenu
+    Frame: {fileID: 3364857308230978853}
+  - Id: DifficultySelector
+    Frame: {fileID: 7412911941188266482}
+  - Id: Game
+    Frame: {fileID: 3391957768750948123}
+  - Id: GameResultPopUp
+    Frame: {fileID: 3391957768750948122}
 --- !u!4 &1138129376
 Transform:
   m_ObjectHideFlags: 0
@@ -623,6 +631,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6401baaad05aacd4e947d631d746f791, type: 3}
+--- !u!1 &3364857308230978853 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3364857308217389065, guid: 6401baaad05aacd4e947d631d746f791,
+    type: 3}
+  m_PrefabInstance: {fileID: 3364857308230978852}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3391957768750948121
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -692,6 +706,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4207364811e998d478eb2dbeee402b4f, type: 3}
+--- !u!1 &3391957768750948122 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7520500934901871576, guid: 4207364811e998d478eb2dbeee402b4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3391957768750948121}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3391957768750948123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3391957769101726551, guid: 4207364811e998d478eb2dbeee402b4f,
+    type: 3}
+  m_PrefabInstance: {fileID: 3391957768750948121}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7412911941188266481
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -811,3 +837,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 679531f9231661f468be0c098ed116e0, type: 3}
+--- !u!1 &7412911941188266482 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7412911940745806027, guid: 679531f9231661f468be0c098ed116e0,
+    type: 3}
+  m_PrefabInstance: {fileID: 7412911941188266481}
+  m_PrefabAsset: {fileID: 0}

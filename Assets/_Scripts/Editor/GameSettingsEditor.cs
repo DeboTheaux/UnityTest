@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
+using UT.GameLogic;
 
 [CustomEditor(typeof(GameSettings))]
 public class GameSettingsEditor : Editor

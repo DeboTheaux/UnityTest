@@ -1,20 +1,23 @@
 ﻿using System;
 using UniRx;
 
-public class Timer
+namespace UT.GameLogic
 {
-    private IDisposable currentTimer;
-
-    public IDisposable Start(double tickSeconds, int seconds, Action<long> EveryTick, Action OnTimeOut)
+    public class Timer
     {
-        return currentTimer = Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(tickSeconds))
-             .TakeWhile(t => t <= seconds)
-             .Subscribe(EveryTick, OnTimeOut);
-    }
+        private IDisposable currentTimer;
 
-    public void Stop()
-    {
-        if (currentTimer != null)
-            currentTimer.Dispose();
+        public IDisposable Start(double tickSeconds, int seconds, Action<long> EveryTick, Action OnTimeOut)
+        {
+            return currentTimer = Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(tickSeconds))
+                 .TakeWhile(t => t <= seconds)
+                 .Subscribe(EveryTick, OnTimeOut);
+        }
+
+        public void Stop()
+        {
+            if (currentTimer != null)
+                currentTimer.Dispose();
+        }
     }
 }
