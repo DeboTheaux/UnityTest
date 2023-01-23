@@ -15,53 +15,14 @@ MonoBehaviour:
   difficulties:
   - name: Easy
     scoreToWin: 100
-    totalGameSeconds: 300
+    totalGameSeconds: 100
     spawnRateMin: 1
-    spawnRateMax: 3
+    spawnRateMax: 2
     objectsAmountMax: 100
-    objectsAmountMin: 65
-    chances:
-    - FigureId:
-        id: BlueSphere
-      probability: 20
+    objectsAmountMin: 100
+    Chances:
     - FigureId:
         id: Coin
-      probability: 10
-    - FigureId:
-        id: RedBox
-      probability: 0
-    - FigureId:
-        id: Shield
-      probability: 5
-    - FigureId:
-        id: TargetMark
-      probability: 5
-    - FigureId:
-        id: YellowBlock
-      probability: 20
-  - name: Medium
-    scoreToWin: 2
-    totalGameSeconds: 10
-    spawnRateMin: 1
-    spawnRateMax: 1
-    objectsAmountMax: 85
-    objectsAmountMin: 65
-    chances:
-    - FigureId:
-        id: BlueSphere
-      probability: 20
-    - FigureId:
-        id: Coin
-      probability: 10
-    - FigureId:
-        id: RedBox
-      probability: 40
-    - FigureId:
-        id: Shield
-      probability: 5
-    - FigureId:
-        id: TargetMark
-      probability: 10
-    - FigureId:
-        id: YellowBlock
-      probability: 20
+      probability: 100
+    addExtraTime:
+      value: 0

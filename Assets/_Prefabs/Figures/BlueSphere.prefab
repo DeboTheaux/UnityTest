@@ -80,6 +80,12 @@ PrefabInstance:
       objectReference: {fileID: 4300000, guid: d5e83122f8e5b6d4cae918de4ade20ed, type: 3}
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
+      propertyPath: figureData
+      value: 
+      objectReference: {fileID: 11400000, guid: 1d8edc9456475fb48bff6a6d417c17ed,
+        type: 2}
+    - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
       propertyPath: scoreToAdd
       value: 2
       objectReference: {fileID: 0}

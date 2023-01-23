@@ -22,6 +22,7 @@ namespace UT.GameLogic
                 var objectPool = new ObjectPool(figure);
                 objectPool.Init(configuration.PoolObjectCount, figure.transform);
                 _pools.Add(figure.Id, objectPool);
+                figure.figureData.OnInitialize?.Invoke();
             }
         }
 

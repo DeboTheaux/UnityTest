@@ -95,6 +95,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
         type: 3}
+      propertyPath: figureData
+      value: 
+      objectReference: {fileID: 11400000, guid: 7e6560b02906b3e41a7a6b09f1b797a5,
+        type: 2}
+    - target: {fileID: 4432137191892476573, guid: 5527826a6315a224d850675a730c4f62,
+        type: 3}
       propertyPath: figureId.id
       value: Coin
       objectReference: {fileID: 0}

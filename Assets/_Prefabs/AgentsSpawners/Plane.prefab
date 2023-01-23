@@ -417,15 +417,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1300689381462198}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52d00ae7988d54d41bf1f23134b62bbb, type: 3}
+  m_Script: {fileID: 11500000, guid: ec01ae8e2c50f0a48a9f639bfd546898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalLife: 10
-  speed: 0.5
-  amplitude: 80
+  speed: 0
+  amplitude: 0
   degreesYRotationPositive: 0
   degreesYRotationNegative: 0
-  delayFrames: 0
   rayDistanceToGround: 10
   layerGround:
     serializedVersion: 2

@@ -13,10 +13,6 @@ MonoBehaviour:
   m_Name: FigureSettings
   m_EditorClassIdentifier: 
   figures:
-  - {fileID: 8712453001704677378, guid: f1bad9ec48cc1e24db6ee6be9b972e3d, type: 3}
   - {fileID: 6248498986428325664, guid: 00f9b872c9afa00469eee44a49b4303c, type: 3}
-  - {fileID: 8044347638931955797, guid: 7b11c588fd9662647978280986821298, type: 3}
-  - {fileID: 4057282156488648104, guid: cda8fdc4d45e8814bb9222dab3274a98, type: 3}
-  - {fileID: 3918577847208987782, guid: bed70db9957d31845b7e95c82aec1c63, type: 3}
-  - {fileID: 14270602131737455, guid: 19a4816e804b935418ebccd950c58d34, type: 3}
+  - {fileID: 8712453001704677378, guid: f1bad9ec48cc1e24db6ee6be9b972e3d, type: 3}
   poolObjectCount: 2

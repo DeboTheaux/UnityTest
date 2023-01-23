@@ -2,6 +2,7 @@
 using System;
 using UnityEngine.UI;
 using UnityEngine;
+using UniRx;
 
 namespace UT.GameLogic
 {
@@ -10,20 +11,17 @@ namespace UT.GameLogic
         [SerializeField] private TextMeshProUGUI nameText;
         [SerializeField] private Button button;
 
-        private string _dificultyName;
 
-        public void ToConfigure(string name, Difficulty difficulty, Action<Difficulty> OnButtonClick)
+        public void ToConfigure(StringReactiveProperty name, Difficulty difficulty, Action<Difficulty> OnButtonClick)
         {
-            this._dificultyName = name;
+            name.Subscribe(Display);
 
             button.onClick.AddListener(() => OnButtonClick(difficulty));
-
-            Display();
         }
 
-        private void Display()
+        private void Display(string dificultyName)
         {
-            nameText.text = _dificultyName;
+            nameText.text = dificultyName;
         }
     }
 }

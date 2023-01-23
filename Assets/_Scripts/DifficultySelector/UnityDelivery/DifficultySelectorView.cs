@@ -23,7 +23,7 @@ namespace UT.GameLogic
         public void ShowGameDifficulty(Difficulty difficulty, Action<Difficulty> OnButtonClick)
         {
             var prefab = Instantiate(difficultyItem, content);
-            prefab.ToConfigure(difficulty.name, difficulty, OnButtonClick);
+            prefab.ToConfigure(difficulty.Name, difficulty, OnButtonClick);
         }
 
         public void Show()

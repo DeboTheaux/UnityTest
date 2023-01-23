@@ -11,24 +11,20 @@ namespace UT.GameLogic
     {
         private readonly IGameView _view;
         private readonly IScoreService _scoreService;
-        private readonly InputCatcher _input;
         private readonly GameSettings _gameSettings;
+        private readonly InputCatcher _input;
         private readonly FigureFactory _figureFactory;
         private readonly FrameNavigator _navigator;
         private readonly List<BehaviourAgent> _spawns;
-        private float _timerSeconds;
-        private float _spawnRateMin;
-        private float _spawnRateMax;
-        private int _objectsAmountMax;
-        private int _objectsAmountMin;
-        private int _scoreToWin;
-        private List<FigureSpawnProbability> _figuresSpawnProbability;
+
         private float _spawnStart;
         private int _totalObjectsToSpawn = 0;
         private int _currentObjectsSpawned = 0;
         private List<Figure> _collidingFigures = new List<Figure>();
         private List<Figure> _recycledFigures = new List<Figure>();
         private List<Figure> _figuresOnScene = new List<Figure>();
+
+        private Difficulty Settings => _gameSettings.SelectedGameDifficulty;
 
         private CompositeDisposable _disposable = new CompositeDisposable();
         private IDisposable _spawnerDisposable;
@@ -53,14 +49,6 @@ namespace UT.GameLogic
 
         public void Present()
         {
-            _scoreToWin = _gameSettings.SelectedGameDifficulty.scoreToWin;
-            _spawnRateMin = _gameSettings.SelectedGameDifficulty.spawnRateMin;
-            _spawnRateMax = _gameSettings.SelectedGameDifficulty.spawnRateMax;
-            _figuresSpawnProbability = _gameSettings.SelectedGameDifficulty.chances;
-            _objectsAmountMax = _gameSettings.SelectedGameDifficulty.objectsAmountMax;
-            _objectsAmountMin = _gameSettings.SelectedGameDifficulty.objectsAmountMin;
-            _timerSeconds = _gameSettings.SelectedGameDifficulty.totalGameSeconds;
-
             _currentObjectsSpawned = 0;
             _totalObjectsToSpawn = GetRandomNumberOfObjectsToSpawn;
             _spawnStart = 0;
@@ -70,7 +58,12 @@ namespace UT.GameLogic
 
         public void OnShow()
         {
-            StartTimerWithSeconds(_timerSeconds);
+            StartTimerWithSeconds(Settings.TotalGameSeconds.Value);
+
+            Settings.addExtraTime
+                .Subscribe(UpdateTimer)
+                .AddTo(_disposable);
+
             CatchUserInputs();
         }
 
@@ -94,6 +87,12 @@ namespace UT.GameLogic
                 GameResult(UserWon ? "Game Win!" : "Game Over");
             }
         }
+
+        private void UpdateTimer(int timeToAdd)
+        {
+            _view.AddTimeToTimer(timeToAdd);
+        }
+
 
         private void CheckRecycleFigures()
         {
@@ -137,7 +136,7 @@ namespace UT.GameLogic
 
         private void UpdateLastSpawnTime(long time) => _spawnStart = time + RandomSpawnRate;
 
-        private float RandomSpawnRate => UnityEngine.Random.Range(_spawnRateMin, _spawnRateMax);
+        private float RandomSpawnRate => UnityEngine.Random.Range(Settings.SpawnRateMin.Value, Settings.SpawnRateMax.Value);
 
         private IEnumerable<BehaviourAgent> SelectAvailableAgents => _spawns.Where(agent => agent.IsAvailable);
 
@@ -150,7 +149,7 @@ namespace UT.GameLogic
 
         private bool HasObjectToSpawn => _currentObjectsSpawned < _totalObjectsToSpawn;
 
-        private int GetRandomNumberOfObjectsToSpawn => UnityEngine.Random.Range(_objectsAmountMin, _objectsAmountMax);
+        private int GetRandomNumberOfObjectsToSpawn => UnityEngine.Random.Range(Settings.ObjectsAmountMin.Value, Settings.ObjectsAmountMax.Value);
         private int IncreaseObjectsSpawned() => ++_currentObjectsSpawned;
 
         private IEnumerable<Figure> CollidingFigures(Vector2 mousePosition) =>
@@ -185,12 +184,14 @@ namespace UT.GameLogic
                     IncreaseObjectsSpawned();
                     _figuresOnScene.Add(newFigure);
                     agent.CompleteSpawn();
+
+                    EventsProvider.EventBus().Execute(new SpawnNewFigureEvent());
                 }, DisposeSpawner);
             });
 
-        private Figure InstantiateRandomFigureWithPosition(Transform transform) => _figureFactory.CreateRandom(_figuresSpawnProbability, transform);
+        private Figure InstantiateRandomFigureWithPosition(Transform transform) => _figureFactory.CreateRandom(Settings.Chances, transform);
 
-        private bool UserWon => _scoreService.Score >= _scoreToWin;
+        private bool UserWon => _scoreService.Score >= Settings.ScoreToWin.Value;
 
         private void Dispose()
         {

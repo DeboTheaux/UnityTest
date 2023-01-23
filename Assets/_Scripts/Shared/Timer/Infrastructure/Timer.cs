@@ -5,19 +5,29 @@ namespace UT.GameLogic
 {
     public class Timer
     {
-        private IDisposable currentTimer;
+        public IDisposable disposable;
+        private long _currentTotalSeconds;
 
-        public IDisposable Start(double tickSeconds, int seconds, Action<long> EveryTick, Action OnTimeOut)
+        public Timer Start(double tickSeconds, int seconds, Action<long> EveryTick, Action OnTimeOut)
         {
-            return currentTimer = Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(tickSeconds))
-                 .TakeWhile(t => t <= seconds)
+            _currentTotalSeconds = seconds;
+
+            disposable = Observable.Timer(TimeSpan.FromSeconds(0), TimeSpan.FromSeconds(tickSeconds))
+                 .TakeWhile(t => t <= _currentTotalSeconds)
                  .Subscribe(EveryTick, OnTimeOut);
+
+            return this;
+        }
+
+        public void AddSeconds(int seconds)
+        {
+            _currentTotalSeconds += seconds;
         }
 
         public void Stop()
         {
-            if (currentTimer != null)
-                currentTimer.Dispose();
+            if (disposable != null)
+                disposable.Dispose();
         }
     }
 }

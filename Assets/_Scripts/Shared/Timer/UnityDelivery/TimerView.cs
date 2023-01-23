@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,38 +11,44 @@ namespace UT.GameLogic
         public event Action<long> EveryTick = (_) => { };
         public event Action OnStopTimer = () => { };
 
-        public int Seconds { set { seconds = value; } }
+        public event Action OnTimeOut = () => { };
+
+        public int Seconds { set { _seconds = value; } }
 
         [SerializeField] private Image imageTimer;
-        [SerializeField] private Text textTimer;
+        [SerializeField] private TextMeshProUGUI textTimer;
 
-        private int seconds;
-        public int RemainingTime => remainingTime;
-        int remainingTime;
-        private IDisposable currentTimer;
+        public int RemainingTime => _remainingTime;
+
+        private int _seconds;
+        private int _remainingTime;
+        private Timer _currentTimer;
+        private IDisposable _disposable;
 
         public void StartTimer(int seconds, Action<long> EveryTick, Action OnTimeOut)
         {
-            OnStartTimer();
-            this.seconds = seconds;
-            remainingTime = seconds;
+            _seconds = seconds;
+            _remainingTime = seconds;
             this.EveryTick += EveryTick;
-            currentTimer = new Timer().Start(1, seconds, UpdateTime, OnTimeOut);
+            this.OnTimeOut += OnTimeOut;
+            _currentTimer = new Timer().Start(1, seconds, UpdateTime, OnTimeOut);
+            _disposable = _currentTimer.disposable;
+            OnStartTimer();
         }
 
         public void Stop()
         {
-            if (currentTimer != null)
+            if (_disposable != null)
             {
                 OnStopTimer();
             }
-            currentTimer?.Dispose();
+            _disposable?.Dispose();
         }
 
         public void UpdateTime(long time)
         {
-            remainingTime = (int)(seconds - time);
-            if (imageTimer != null) UpdateImage(remainingTime, seconds);
+            _remainingTime = (int)(_seconds - time);
+            if (imageTimer != null) UpdateImage(_remainingTime, _seconds);
             if (textTimer != null) UpdateText();
             EveryTick(time);
         }
@@ -57,10 +62,15 @@ namespace UT.GameLogic
 
         void UpdateText()
         {
-            if (textTimer.text == remainingTime.ToString())
+            if (textTimer.text == _remainingTime.ToString())
                 return;
-            textTimer.text = remainingTime.ToString();
+            textTimer.text = _remainingTime.ToString();
         }
 
+        public void AddTimeToTimer(int secondsToAdd)
+        {
+            _seconds += secondsToAdd;
+            _currentTimer.AddSeconds(secondsToAdd);
+        }
     }
 }

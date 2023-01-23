@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using UT.GameLogic;
+using UniRx;
 
 [CustomEditor(typeof(GameSettings))]
 public class GameSettingsEditor : Editor
@@ -8,10 +9,8 @@ public class GameSettingsEditor : Editor
     GameSettings t;
     SerializedObject GetTarget;
     SerializedProperty ThisList;
+
     int ListSize;
-    FigureSpawnProbability figureTarget;
-    SerializedObject FigureGetTarget;
-    SerializedProperty ThisFigure;
 
     void OnEnable()
     {
@@ -49,12 +48,13 @@ public class GameSettingsEditor : Editor
             EditorGUILayout.Space();
 
             SerializedProperty listRef = ThisList.GetArrayElementAtIndex(i);
+
             SerializedProperty difficultyName = listRef.FindPropertyRelative("name");
             SerializedProperty scoreToWin = listRef.FindPropertyRelative("scoreToWin");
             SerializedProperty totalGameSeconds = listRef.FindPropertyRelative("totalGameSeconds");
             SerializedProperty spawnRateMin = listRef.FindPropertyRelative("spawnRateMin");
             SerializedProperty spawnRateMax = listRef.FindPropertyRelative("spawnRateMax");
-            SerializedProperty listOfChances = listRef.FindPropertyRelative("chances");
+            SerializedProperty listOfChances = listRef.FindPropertyRelative("Chances");
             SerializedProperty objectsAmountMin = listRef.FindPropertyRelative("objectsAmountMin");
             SerializedProperty objectsAmountMax = listRef.FindPropertyRelative("objectsAmountMax");
 
@@ -114,10 +114,10 @@ public class GameSettingsEditor : Editor
 
             //Remove this index from the List
             GUI.backgroundColor = Color.red;
-            if (GUILayout.Button($"Remove '{difficultyName.stringValue}'", GUILayout.MaxWidth(130), GUILayout.MaxHeight(20)))
-            {
-                ThisList.DeleteArrayElementAtIndex(i);
-            }
+            //if (GUILayout.Button($"Remove '{difficultyName.stringValue}'", GUILayout.MaxWidth(130), GUILayout.MaxHeight(20)))
+            //{
+            //    ThisList.DeleteArrayElementAtIndex(i);
+            //}
             GUI.backgroundColor = Color.white;
             EditorGUILayout.Space();
             EditorGUILayout.Space();

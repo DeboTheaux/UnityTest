@@ -29,7 +29,7 @@ namespace UT.GameLogic
         {
             _presenter.Present();
             _presenter.OnShow();
-            Debug.Log($"Selected Difficulty: {gameSettings.SelectedGameDifficulty.name}");
+            Debug.Log($"Selected Difficulty: {gameSettings.SelectedGameDifficulty.Name}");
             gameObject.SetActive(true);
         }
 
@@ -46,6 +46,11 @@ namespace UT.GameLogic
         public void StopTimer()
         {
             timerView.Stop();
+        }
+
+        public void AddTimeToTimer(int newTotalSeconds)
+        {
+            timerView.AddTimeToTimer(newTotalSeconds);
         }
     }
 }
