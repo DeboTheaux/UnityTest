@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98fe31c6c467c08428fb03de9612649e, type: 3}
-  m_Name: ChangeGameProbability
+  m_Name: Spawn3Coins
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: a8aff5466cf0f6a40bf984281c044df5, type: 2}
   newChances:

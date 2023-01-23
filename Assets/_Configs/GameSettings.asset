@@ -15,14 +15,103 @@ MonoBehaviour:
   difficulties:
   - name: Easy
     scoreToWin: 100
-    totalGameSeconds: 100
-    spawnRateMin: 1
-    spawnRateMax: 2
+    totalGameSeconds: 300
+    spawnRateMin: 2
+    spawnRateMax: 5
     objectsAmountMax: 100
     objectsAmountMin: 100
     Chances:
     - FigureId:
         id: Coin
       probability: 100
+    - FigureId:
+        id: BlueCoin
+      probability: 50
+    - FigureId:
+        id: RedCoin
+      probability: 70
+    - FigureId:
+        id: BlueSphere
+      probability: 50
+    - FigureId:
+        id: GreenBlock
+      probability: 50
+    - FigureId:
+        id: Shield
+      probability: 10
+    - FigureId:
+        id: Target
+      probability: 30
+    - FigureId:
+        id: RedBlock
+      probability: 30
     addExtraTime:
       value: 0
+  - name: Normal
+    scoreToWin: 200
+    totalGameSeconds: 250
+    spawnRateMin: 1
+    spawnRateMax: 3
+    objectsAmountMax: 100
+    objectsAmountMin: 100
+    Chances:
+    - FigureId:
+        id: Coin
+      probability: 100
+    - FigureId:
+        id: RedCoin
+      probability: 50
+    - FigureId:
+        id: BlueCoin
+      probability: 50
+    - FigureId:
+        id: BlueSphere
+      probability: 100
+    - FigureId:
+        id: GreenBlock
+      probability: 20
+    - FigureId:
+        id: RedBlock
+      probability: 35
+    - FigureId:
+        id: Shield
+      probability: 10
+    - FigureId:
+        id: Target
+      probability: 15
+    addExtraTime:
+      value: 0
+  - name: Hard
+    scoreToWin: 300
+    totalGameSeconds: 150
+    spawnRateMin: 1
+    spawnRateMax: 1
+    objectsAmountMax: 100
+    objectsAmountMin: 100
+    Chances:
+    - FigureId:
+        id: Coin
+      probability: 100
+    - FigureId:
+        id: BlueCoin
+      probability: 50
+    - FigureId:
+        id: RedCoin
+      probability: 70
+    - FigureId:
+        id: BlueSphere
+      probability: 50
+    - FigureId:
+        id: GreenBlock
+      probability: 50
+    - FigureId:
+        id: Shield
+      probability: 10
+    - FigureId:
+        id: Target
+      probability: 30
+    - FigureId:
+        id: RedBlock
+      probability: 30
+    addExtraTime:
+      value: 4

@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c844d9e6894aed43ac02f57c42b094f, type: 3}
-  m_Name: BlueSphereFigureData
+  m_Name: RedBlockFigureData
   m_EditorClassIdentifier: 
   figureId:
-    id: BlueSphere
+    id: RedBlock
   scoreToAdd:
-    value: 1
+    value: -5
   scoreToRemove:
-    value: 1
+    value: 0
   isRandomScore:
     value: 0
   minScore:

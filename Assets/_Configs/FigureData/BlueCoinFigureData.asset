@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c844d9e6894aed43ac02f57c42b094f, type: 3}
-  m_Name: BlueSphereFigureData
+  m_Name: BlueCoinFigureData
   m_EditorClassIdentifier: 
   figureId:
-    id: BlueSphere
+    id: BlueCoin
   scoreToAdd:
     value: 1
   scoreToRemove:
     value: 1
   isRandomScore:
-    value: 0
+    value: 1
   minScore:
     value: 1
   maxScore:
     value: 8
   collisionRadius:
-    value: 20
+    value: 10
   clicksToDisappear:
     value: 1
   timeToDisappear:
